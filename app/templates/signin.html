@@ -16,6 +16,32 @@
             <b>key2</b>: {{thing.key2}}
         </p>
     {% endfor %}
+    <hr>
+
+    <!-- flash message for form submission -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+                {% for message in messages %}
+                <span style='color: green;'>{{ message }}</span>
+                {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- the actual form -->
+    <h1>Sign In</h1>
+    <form action='' method='post' name='signin'>
+    <!-- No password for now:
+    {{form.hidden_tag()}} -->
+        <p>
+            User Name<br/>
+            {{form.user_name(size=40)}}
+            {% for error in form.errors.user_name %}
+                <span style='color: red;'>{{error}}</span>
+            {% endfor %}
+        </p>
+        <p><input type='submit' value='Sign In'></p>
+    </form>
+
 
 </body>
 </html>
