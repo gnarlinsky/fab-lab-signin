@@ -36,7 +36,9 @@
             User Name<br/>
             {{form.user_name(size=40)}}
             {% for error in form.errors.user_name %}
-                <span style='color: red;'>{{error}}</span>
+                <span style='color: red;'>
+                    {{error}} (This is your full name that you provided when you signed up.)
+                </span>
             {% endfor %}
         </p>
         <p><input type='submit' value='Sign In'></p>
