@@ -1,11 +1,14 @@
-{% extends 'base.html' %}
-{% block content %}
-    <p>Here's the current user: </p>
+<html>
+<head>
+    <title>{{title}}</title>
+</head>
+<body>
+    <div>Navigaton tabs, etc. go here</div>
+    <p>Here's the current user and info: </p>
     <ul>
         <li>USER: {{user}}</li>
         <li>USER.NICKNAME: {{user.nickname}}</li>
     </ul>
-
     <h1>Looping over some stuff just for fun</h1>
     {% for thing in stuff %}
         <p>
@@ -13,4 +16,6 @@
             <b>key2</b>: {{thing.key2}}
         </p>
     {% endfor %}
-{% endblock content %}
+
+</body>
+</html>
