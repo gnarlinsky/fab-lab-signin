@@ -3,8 +3,11 @@ Flask-SQLAlchemy==1.0
 Flask-WTF==0.8.4
 Jinja2==2.7.1
 MarkupSafe==0.18
-SQLAlchemy==0.8.2
+SQLAlchemy==0.7.9
+Tempita==0.5.1
 WTForms==1.0.4
 Werkzeug==0.9.3
+decorator==3.4.0
 itsdangerous==0.23
+sqlalchemy-migrate==0.7.2
 wsgiref==0.1.2
