@@ -2,3 +2,4 @@ flve
 activate
 *.pyc
 *.db
+db_repository
