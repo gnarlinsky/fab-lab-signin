@@ -4,3 +4,4 @@ activate
 *.db
 db_repository
 *.swp
+.DS_Store
