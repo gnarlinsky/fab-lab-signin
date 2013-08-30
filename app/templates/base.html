@@ -1,0 +1,49 @@
+<html>
+<head>
+    <title>{{title}}</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static',
+    filename='style.css') }}"> 
+    <link rel="icon" href="../static/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../static/img/favicon.ico" type="image/x-icon">
+    <!-- Temp style!!!!!! -->
+    <style>
+        body { font-family: Georgia;}
+        table { border-collapse:collapse; }
+        table,th, td { border: 1px solid black; padding: 3px; }
+    </style>
+</head>
+<body>
+
+    <!-- flash message for form submission -->
+    <p>Here come some flash messages........</p>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div style="width: 600px; margin: 20px auto; padding: 10px; text-align: center; border: 1px blue solid">
+                {% for message in messages %}
+                    {{ message }}<br />
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- TEMP SIGNIN/OUT/UP "TABS" -->
+    <div style="width: 300px; margin: 20px auto; text-align: center">
+        <img src='../static/img/Logo.jpg' width='100px'/>
+        <div>
+            <a href='/signup'>Create Account</a> |
+            <a href='/signin'>Sign In</a> |
+            <a href='/signout'>Sign Out</a>
+        </div>
+    </div>
+
+    <div style="border: 2px green solid; padding: 10px; margin: 10px;">
+        {% block content %}{% endblock %}
+    </div>
+
+    <div style="width: 300px; margin: 20px auto; text-align: center">
+        (footer)
+    </div>
+
+
+</body>
+</html>
