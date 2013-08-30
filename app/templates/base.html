@@ -2,7 +2,7 @@
 <head>
     <title>{{title}}</title>
     <link rel=stylesheet type=text/css href="{{ url_for('static',
-    filename='style.css') }}"> 
+    filename='Screen.css') }}"> 
     <link rel="icon" href="../static/img/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="../static/img/favicon.ico" type="image/x-icon">
     <!-- Temp style!!!!!! -->
@@ -39,6 +39,119 @@
     <div style="border: 2px green solid; padding: 10px; margin: 10px;">
         {% block content %}{% endblock %}
     </div>
+
+    <div>
+        <h3>Original</h3>
+
+	<div id="tab-container" class="tab-container"><a href="#"><img src="Logo.jpg" alt="Champaign-Urbana Community Fab Lab" width="600" height="450" /></a><span class="redtext"><?php echo($message); ?></span>
+        <div id="buttons">
+        	<ul class="etabs">
+            	<li><a href="#createaccount" class="blue tab">Create Account</a></li>
+            	<li><a href="#signin" class="green tab">Sign In</a></li>
+            	<li><a href="#signout" class="red tab">Sign Out</a></li>
+          </ul>
+       <br class="clear" />   
+      </div>
+        <div class="panel-container">
+          <div id="createaccount" class="blue">
+          <p>Please sign up for an account. Don't worry, we won't give out your personal information to anyone. Only a <strong>user name is required</strong>, the rest is optional.</p>
+          <div class="formarea">
+          <form action="index.php" method="post" onsubmit="return validateForm()" name="myform">
+          <div class="right formblock">
+          <label class="redtext"><strong>Choose a User Name</strong></label>
+          <input autocomplete="off" name="new_user_name" class="" tabindex="1" maxlength="270" size="32" value="" type="text">
+          </div>
+          <div class="right formblock">
+          <label>First Name</label>
+          <input autocomplete="off" name="first_name" class="" tabindex="2" maxlength="270" size="32" value="" type="text">
+          </div>
+          <div class="right formblock">
+          <label>Last Name</label>
+          <input autocomplete="off" name="last_name" class="" tabindex="3" maxlength="270" size="32" value="" type="text">
+          </div>
+          <div class="right formblock">
+          <label>Email</label>
+          <input autocomplete="off" name="email" class="" tabindex="4" maxlength="270" size="32" value="" type="email">
+          </div>
+          <div class="right formblock">
+          <label>Can we add you to the <a href="#">announcement</a> <a href="#"><img src="information_icon_sm.fw.png" width="20" height="20" class="info" alt="more information" /></a> listserv?</label>
+            <label>
+              <input type="radio" name="announcelistserv" value="radio" id="announcelistserv_0">
+              Yes</label>
+            <label>
+              <input type="radio" name="announcelistserv" value="radio" id="announcelistserv_1">
+              No</label>
+
+          </div>
+          <div class="right formblock">
+          <label>Can we add you to the <a href="#">volunteer</a> <a href="#"><img src="information_icon_sm.fw.png" width="20" height="20" class="info" alt="more information" /></a> listserv? </label>
+          
+          <label>
+              <input type="radio" name="volunteerlistserv" value="radio" id="volunteerlistserv_0">
+              Yes</label>
+            <label>
+              <input type="radio" name="volunteerlistserv" value="radio" id="volunteerlistserv_1">
+              No</label>
+          </div>
+          <div class="right formblock">How did you hear about us?
+              <input autocomplete="off" name="howdidyouhear" class="" tabindex="5" maxlength="270" size="32" value="" type="textarea">
+            </div>
+          <div class="right formblock">
+          <label>Are you a student at UIUC?</label>
+          
+          <label>
+              <input type="radio" name="student" value="radio" id="student_0">
+              Yes</label>
+            <label>
+              
+              <input type="radio" name="student" value="radio" id="student_1">
+              If not, please tell us what you do</label>
+          <input autocomplete="off" name="other" class="" maxlength="270" size="32" value="" type="text"></div>
+            
+            <input type="submit" value="Create Account" name="submit">
+            </form>
+            <p class="right clear"><a href="#">privacy policy</a> <a href="#"><img src="information_icon_sm.fw.png" width="20" height="20" class="info" alt="more information" /></a></p>
+            <br class="clear" />
+          </div>
+          </div>
+          <div id="signin" class="green">
+          <h2>User Name</h2>
+          <form action="index.php" method="post" autocomplete="off">
+                        <div>
+                            <input autocomplete="off" name="user_name" class="textbox" tabindex="0" maxlength="240" size="28" value="" type="text">
+                        </div>
+          </form>
+          </div>
+          <div id="signout">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+              <tr>
+                <th width="60%" class="red whitetext">Name</th>
+                <th width="20%" class="red whitetext">Login Time</th>
+                <th width="20%" class="red whitetext">Sign Out</th>
+              </tr>
+				<?php 
+                /*$con = mysql_connect('localhost','root',''); */
+                $con = mysql_connect('localhost','root','root'); 
+                if(!$con){die('Could no connect: '.mysql_error());}
+                mysql_select_db("fablab",$con);
+                $query = "select user_info.*, user_login.login_time from user_login inner join user_info on user_info.user_id = user_login.user_id where logout_time is null";
+                $result = mysql_query($query);
+                while($row = mysql_fetch_array($result, MYSQL_BOTH))
+                {
+                    echo("<tr><td>".$row["first_name"]. " ".$row["last_name"]. " </td><td>".$row['login_time']."</td><td><a href='logout.php?user_id=".$row['user_id']."'>Sign Out</a></td></tr>");
+                }
+                mysql_close($con);
+                ?>
+            </table>
+            <br class="clear" /> 
+          </div>
+		</div>
+</div>
+
+
+    </div>
+
+
 
     <div style="width: 300px; margin: 20px auto; text-align: center">
         (footer)
