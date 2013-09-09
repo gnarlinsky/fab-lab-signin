@@ -1,0 +1,104 @@
+<html>
+<head>
+    <title>{{title}}</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='Screen.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+
+    <style>
+        table {
+            width: 100%; 
+            border-collapse: collapse !important;
+        }
+        th {
+            text-align: center !important;
+        }
+        td {
+            border-bottom: 1px red solid;
+            text-align: center !important;
+        }
+        td.bluestats {
+            border-bottom: 1px #163B65 solid;
+        }
+    </style>
+
+</head>
+<body style="background: none;">
+
+    <div id="signout" class="red">
+        <div style="padding:3px; margin:10px auto;" class="red">
+            <!-- If there are no users, don't show the table -->
+            {% if all_users == [] %}
+                <p>No one is signed in</p>
+            {% else %}
+                <table>
+                    <tr>
+                        <!-- TODO: styles here -->
+                        <th class="red whitetext">First Name</th>
+                        <th class="red whitetext">Last Name</th>
+                        <th class="red whitetext">User Name</th>
+                        <th class="red whitetext">Email</th>
+                        <th class="red whitetext" style="width: 5em;">Who I Am</th>
+                        <th class="red whitetext" style="width: 5em;">How Heard</th>
+                        <th class="red whitetext" style="width: 5em;">Add to Volunteer List?</th>
+                        <th class="red whitetext" style="width: 5em;">Add to Announce List?</th>
+                        <th class="red whitetext" style="width: 17em;">All Visits</th>
+                        <th class="red whitetext">Current Time In</th>
+                        <th class="red whitetext" style="width: 5em;">Sign Out</th>
+                    </tr>
+                    {% for user in all_users %}
+                        <tr>
+                            <td>{{ user.first_name }}</td>
+                            <td>{{ user.last_name }}</td>
+                            <td>{{ user.user_name }}</td>
+                            <td>{% if user.email %}{{ user.email }}{% endif %}</td>
+                            <td style="width: 5em;"> <!-- TODO: no ``if``? ... reorg... -->
+                                {% if user.is_uiuc_student %}UIUC Student{%
+                                endif %}<br />
+                                {% if user.who_i_am %}{{ user.who_i_am }}{%
+                                endif %}
+                            </td>
+                            <td style="width: 5em;">{{ user.how_heard }}</td>
+                            <td style="width: 5em;">{{ user.add_to_volunt_list }}</td>
+                            <td>{{ user.add_to_announce_list }}</td>
+                            <td style="width:17em;">{{ user.get_all_visits() }}</td>
+                            <td>{{ user.get_time_in() }}</td>
+                            <td> <a href='/signout/{{ user.id }}'>Sign Out</a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- TODO: styles...... -->
+    <div id="signout" class="blue">
+        <div style="padding:3px; margin:10px auto;" class="blue">
+            <!-- If there are no visits, don't show the table -->
+            {% if all_visits == [] %}
+                <p>No visits</p>
+            {% else %}
+                <!-- TODO: this is interim/hacky, just looping through -->
+                <table style="border-color: #163B65 !important;">
+                    <tr>
+                        <!-- TODO: styles here -->
+                        {% for key in visit_keys %}
+                            <th class="blue whitetext">{{ key }}</th>
+                        {% endfor %}
+                    </tr>
+                    {% for visit in all_visits %}
+                        <a href="#{{ visit.id }}"></a>
+                        <tr>
+                        {% for key in visit_keys %}
+                            <td class="bluestats">{{
+                            visit.__getattribute__(key) }}</th>
+                        {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+</html>
