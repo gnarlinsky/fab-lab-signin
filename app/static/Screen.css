@@ -1,0 +1,218 @@
+@charset "utf-8";
+/* Fab Lab Sign-In Interface Styles */
+
+html{
+	overflow-y: scroll;
+}
+
+body{
+	font-family:'Ubuntu', Verdana, Sans-Serif;
+	background:url(background.jpg) no-repeat black;
+}
+
+.clear{
+	clear:both;
+}
+
+.block{
+	display:block;
+}
+
+.hidden{
+	display:none;
+}
+
+.right{
+	float:right;
+}
+
+.left{
+	float:left;
+}
+
+.red{
+	background-color:#C42027;
+}
+.blue{
+	background-color:#163B65;
+}
+.green{
+	background-color:#209467;
+}
+
+.yellow{
+	color:#FF0;
+}
+
+.whitetext{
+	color:white;
+}
+
+.redtext{
+	color:#C42027;
+}
+
+#tab-container{
+	width:600px;
+	/*margin:80px auto;*/
+	margin:20 auto;
+	/*background:white;*/
+	-webkit-box-shadow: 0px 1px 8px rgba(0, 0, 0, 1);
+	-moz-box-shadow:    0px 1px 8px rgba(0, 0, 0, 1);
+	box-shadow:         0px 1px 8px rgba(0, 0, 0, 1);
+}
+
+#tab-container img{
+	border:0;
+}
+
+#buttons ul{
+	list-style:none;
+	margin:0;
+	padding:0;
+	width:100%;
+}
+
+#buttons ul li{
+	padding:0;
+	margin:0;
+	display:block;
+	float:left;
+	text-align:center;
+	font-size:120%;
+}
+
+#buttons ul li a{
+	width:200px;
+	display:block;
+	padding:25px 0;
+	color:white;
+	text-decoration:none;
+}
+
+#buttons ul li a:hover, #buttons ul li a:active{
+	text-decoration:underline;
+}
+
+/* General Panel Section Styles */
+
+
+/* TODO:  added this as a fix for that bar between buttons and content under
+ * them... but need to change the original*/
+/*
+.panel-container{
+    margin-top: -16px;
+}
+*/
+
+.panel-container h2{
+	margin-top:0;
+}
+
+.panel-container form{
+	margin-bottom:10px;
+}
+
+#createaccount, #signin, #signout{
+	color:white;
+	/*padding:30px 20px;*/
+}
+
+/* Specific Panel Section Styles */
+
+#createaccount{
+	text-align:left;
+	padding:1px 0 0 0;
+}
+
+	#createaccount p{
+		padding:0 20px;
+	}
+	
+	#createaccount a:link, #createaccount a:visited{
+		color:#209467;
+	}
+	
+	#createaccount a:active, #createaccount a:hover{
+		text-decoration:none;
+		color:#209467;
+	}
+	
+	#createaccount .formarea{
+		background-color:white;
+		color:#333;
+		padding:10px 20px;
+	}
+	
+	#createaccount form{
+		text-align:right;
+	}
+	
+	#createaccount .formblock{
+		width:100%;
+		padding:1px 0;
+	}
+	
+	#createaccount input{
+		margin:4px 0 1px 4px;
+	}
+	
+	#createaccount input[type="text"], #createaccount input[type="textarea"], #createaccount input[type="email"]{
+		background-color:#EEE;
+		border:1px solid #333;
+	}
+	
+	#createaccount .info{
+		margin-bottom:-3px;
+	}
+	
+	#createaccount input[type="submit"]{
+		background-color:#C42027;
+		color:white;
+		font-family:'ubuntu', verdana, sans-serif;
+		font-weight:bold;
+		border:0;
+		padding:3px;
+		margin-top:3px;
+	}
+
+#signin{
+	/*text-align:center;*/
+    text-align: left; 
+}
+
+#signout{
+	padding:0;
+}
+
+#signout table{
+	background-color:white;
+	margin:0 auto;
+	color:black;
+	padding:0;
+}
+
+#signout td, #signout th{
+	padding:12px 16px;
+	text-align:left;
+}
+
+/* paragraph backgrounds should be same as panel they're in  */
+/* TODO:  clean up styles because this should not be explicit */
+p {
+    padding: 0; 
+    margin: 0; 
+}
+/*
+#signout p {
+    background-color: #C42027;
+}
+
+#createaccount p {
+    background-color: #163B65;
+}
+
+#signin p {
+    background-color: #209467;
+}
+*/
