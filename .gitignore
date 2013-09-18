@@ -1,7 +1,9 @@
 flve
 activate
+db_repository
 *.pyc
 *.db
-db_repository
 *.swp
 .DS_Store
+current
+.coverage
