@@ -6,5 +6,6 @@ db_repository
 *.swp
 .DS_Store
 current
+no
 .coverage
 coverage
