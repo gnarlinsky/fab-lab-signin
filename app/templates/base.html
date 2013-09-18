@@ -1,24 +1,71 @@
 <html>
 <head>
     <title>{{title}}</title>
-    <link rel=stylesheet type=text/css href="{{ url_for('static',
-    filename='Screen.css') }}"> 
-    <link rel="icon" href="../static/img/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="../static/img/favicon.ico" type="image/x-icon">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='Screen.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
     <!-- Temp style!!!!!! -->
+    <!--
     <style>
         body { font-family: Georgia;}
         table { border-collapse:collapse; }
         table,th, td { border: 1px solid black; padding: 3px; }
     </style>
+    -->
+    <script src="{{ url_for('static', filename='jquery-1.7.1.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='jquery.hashchange.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='jquery.easytabs.js') }}" type="text/javascript"></script>
+
+
+    <!-- TODO: move below thanks to elsewhere... like a developer doc -->
+    <!--
+    Thanks to Alfa Jango for the EasyTabs.js - http://os.alfajango.com/easytabs/
+    -->
+
+    <!-- TODO: clean up/consolidate -->
+    <script type="text/javascript">
+        /***************************************
+        * easytabs
+        ***************************************/
+      $(document).ready( function() {
+        $('#tab-container').easytabs({
+        animate: false,
+        /*
+        transitionCollapse: 'show', */
+        /* clicking again on same tab, stay
+        there */
+
+        /*
+        collapsible: true,
+        transitionCollapse: 'slideUp',
+        transitionIn: 'slideDown',
+        transitionInEasing: 'swing',
+        transitionOut: 'slideUp',
+        transitionIn: 'fadeIn',
+        transitionOut: 'hide',
+        transitionInEasing: 'linear',
+        collapsedByDefault: true,
+        */
+        collapsedByDefault: false, 
+        tabs: "> div > ul > li",
+        });
+      });
+        /***************************************
+        * redirect to specified anchor
+        ***************************************/
+      $(document).ready( function() {
+        location = "#{{ context_things.anchor }}";
+        });
+    </script>
 </head>
 <body>
-
     <!-- flash message for form submission -->
-    <p>Here come some flash messages........</p>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
-            <div style="width: 600px; margin: 20px auto; padding: 10px; text-align: center; border: 1px blue solid">
+        <!-- note the new 'class = category ' below!! -->
+            <div style="width: 300px; margin: 20px auto; padding: 10px;
+            text-align: center; border: 1px blue solid; background: #fff"
+            class="{{ category }}">
                 {% for message in messages %}
                     {{ message }}<br />
                 {% endfor %}
@@ -26,137 +73,148 @@
         {% endif %}
     {% endwith %}
 
-    <!-- TEMP SIGNIN/OUT/UP "TABS" -->
-    <div style="width: 300px; margin: 20px auto; text-align: center">
-        <img src='../static/img/Logo.jpg' width='100px'/>
-        <div>
-            <a href='/signup'>Create Account</a> |
-            <a href='/signin'>Sign In</a> |
-            <a href='/signout'>Sign Out</a>
-        </div>
-    </div>
+    <!-- outer div for centering -->
+    <div style="margin:0 auto; width:600px;">
 
-    <div style="border: 2px green solid; padding: 10px; margin: 10px;">
-        {% block content %}{% endblock %}
-    </div>
 
-    <div>
-        <h3>Original</h3>
+        <div id="tab-container" class="tab-container">
 
-	<div id="tab-container" class="tab-container"><a href="#"><img src="Logo.jpg" alt="Champaign-Urbana Community Fab Lab" width="600" height="450" /></a><span class="redtext"><?php echo($message); ?></span>
-        <div id="buttons">
-        	<ul class="etabs">
-            	<li><a href="#createaccount" class="blue tab">Create Account</a></li>
-            	<li><a href="#signin" class="green tab">Sign In</a></li>
-            	<li><a href="#signout" class="red tab">Sign Out</a></li>
-          </ul>
-       <br class="clear" />   
-      </div>
-        <div class="panel-container">
-          <div id="createaccount" class="blue">
-          <p>Please sign up for an account. Don't worry, we won't give out your personal information to anyone. Only a <strong>user name is required</strong>, the rest is optional.</p>
-          <div class="formarea">
-          <form action="index.php" method="post" onsubmit="return validateForm()" name="myform">
-          <div class="right formblock">
-          <label class="redtext"><strong>Choose a User Name</strong></label>
-          <input autocomplete="off" name="new_user_name" class="" tabindex="1" maxlength="270" size="32" value="" type="text">
-          </div>
-          <div class="right formblock">
-          <label>First Name</label>
-          <input autocomplete="off" name="first_name" class="" tabindex="2" maxlength="270" size="32" value="" type="text">
-          </div>
-          <div class="right formblock">
-          <label>Last Name</label>
-          <input autocomplete="off" name="last_name" class="" tabindex="3" maxlength="270" size="32" value="" type="text">
-          </div>
-          <div class="right formblock">
-          <label>Email</label>
-          <input autocomplete="off" name="email" class="" tabindex="4" maxlength="270" size="32" value="" type="email">
-          </div>
-          <div class="right formblock">
-          <label>Can we add you to the <a href="#">announcement</a> <a href="#"><img src="information_icon_sm.fw.png" width="20" height="20" class="info" alt="more information" /></a> listserv?</label>
-            <label>
-              <input type="radio" name="announcelistserv" value="radio" id="announcelistserv_0">
-              Yes</label>
-            <label>
-              <input type="radio" name="announcelistserv" value="radio" id="announcelistserv_1">
-              No</label>
-
-          </div>
-          <div class="right formblock">
-          <label>Can we add you to the <a href="#">volunteer</a> <a href="#"><img src="information_icon_sm.fw.png" width="20" height="20" class="info" alt="more information" /></a> listserv? </label>
-          
-          <label>
-              <input type="radio" name="volunteerlistserv" value="radio" id="volunteerlistserv_0">
-              Yes</label>
-            <label>
-              <input type="radio" name="volunteerlistserv" value="radio" id="volunteerlistserv_1">
-              No</label>
-          </div>
-          <div class="right formblock">How did you hear about us?
-              <input autocomplete="off" name="howdidyouhear" class="" tabindex="5" maxlength="270" size="32" value="" type="textarea">
+            <a href="/index#signin"><img src="{{ url_for('static', filename='Logo.jpg') }}"
+            alt="Champaign-Urbana Community Fab Lab" width="600" height="450" /></a>
+            <div id="buttons">
+                <!-- <ul class="etabs"> -->
+                <ul>
+                <!-- <li><a href="#createaccount" class="blue tab">Create Account</a></li> -->
+                    <li><a href="#signup" class="blue tab">Create Account</a></li>
+                    <li><a href="#signin" class="green tab">Sign In</a></li>
+                    <li><a href="#signout" class="red tab">Sign Out</a></li>
+                </ul>
+                <br class="clear" />
             </div>
-          <div class="right formblock">
-          <label>Are you a student at UIUC?</label>
-          
-          <label>
-              <input type="radio" name="student" value="radio" id="student_0">
-              Yes</label>
-            <label>
-              
-              <input type="radio" name="student" value="radio" id="student_1">
-              If not, please tell us what you do</label>
-          <input autocomplete="off" name="other" class="" maxlength="270" size="32" value="" type="text"></div>
-            
-            <input type="submit" value="Create Account" name="submit">
-            </form>
-            <p class="right clear"><a href="#">privacy policy</a> <a href="#"><img src="information_icon_sm.fw.png" width="20" height="20" class="info" alt="more information" /></a></p>
-            <br class="clear" />
-          </div>
-          </div>
-          <div id="signin" class="green">
-          <h2>User Name</h2>
-          <form action="index.php" method="post" autocomplete="off">
-                        <div>
-                            <input autocomplete="off" name="user_name" class="textbox" tabindex="0" maxlength="240" size="28" value="" type="text">
+
+
+
+            <div class="panel-container">
+            <!-- <div id="createaccount" class="blue"> -->
+
+                <div id="signin" class="green">
+                    <form action='signin' method='post' name='signin' autocomplete='off'>
+                    {# <!-- No password for now:
+                    {{form.hidden_tag()}} --> 
+                    <!--
+                        <p>
+                            User Name<br/>
+                            {{form.user_name(size=40)}}
+                            {% for error in form.errors.user_name %}
+                                <span style='color: red;'>
+                                    {{error}} (Please provide your user name or email address)
+                                </span>
+                            {% endfor %}
+                        </p>
+                        -->#}
+                        <div style="padding:30px;" class="green">
+                            <p>What are you going to do today?</p>
+                               {% for field in context_things.signin_form %}
+                                  <!-- control placement of label relative to field (labels for
+                                       text fields go before the field; checkbox labels go after
+                                       the field -->
+                                    {% if field.type == 'BooleanField' %}
+                                       <p>{{ field }} {{ field.label }}</p>
+                                   {% elif field.type ==  'TextField'  or field.type == 'TextAreaField' %}
+                                       <p>{{ field.label }} {{ field }}</p>
+                                    {% endif %}
+                                    <!-- loop through errors for this field -->
+                                    {% for field_name, field_errors in context_things.signin_form.errors.items() %}
+                                        {% if field_name==field.name %}
+                                            {% for error in field_errors %}
+                                                <span style='color: red;'>{{ error }}</span>
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endfor %}
+                               {% endfor %}
+                                 <p><input type='submit' value='Sign In'></p>
                         </div>
-          </form>
-          </div>
-          <div id="signout">
-            <table width="100%" border="0" cellpadding="0" cellspacing="0">
-              <tr>
-                <th width="60%" class="red whitetext">Name</th>
-                <th width="20%" class="red whitetext">Login Time</th>
-                <th width="20%" class="red whitetext">Sign Out</th>
-              </tr>
-				<?php 
-                /*$con = mysql_connect('localhost','root',''); */
-                $con = mysql_connect('localhost','root','root'); 
-                if(!$con){die('Could no connect: '.mysql_error());}
-                mysql_select_db("fablab",$con);
-                $query = "select user_info.*, user_login.login_time from user_login inner join user_info on user_info.user_id = user_login.user_id where logout_time is null";
-                $result = mysql_query($query);
-                while($row = mysql_fetch_array($result, MYSQL_BOTH))
-                {
-                    echo("<tr><td>".$row["first_name"]. " ".$row["last_name"]. " </td><td>".$row['login_time']."</td><td><a href='logout.php?user_id=".$row['user_id']."'>Sign Out</a></td></tr>");
-                }
-                mysql_close($con);
-                ?>
-            </table>
-            <br class="clear" /> 
-          </div>
-		</div>
+                    </form>
+                </div>  <!-- id='signin' -->
+
+
+              <div id="signup" class="blue">
+                <form action='/signup' method='post' name='signup' autocomplete='off'>
+                    <div style="padding:30px" class="blue">
+                       {% for field in context_things.signup_form %}
+            <!-- control placement of label relative to field (labels for text fields go
+                 before the field; checkbox labels go after the field -->
+                        {% if field.type == 'BooleanField' %}
+                         <p>{{ field }} {{ field.label }}</p>
+                         {% elif field.type == 'TextField' or field.type == 'TextAreaField' %}
+                         <p>{{ field.label }}: {{ field }}</p>
+                         {% endif %}
+                            <!-- loop through errors for this field -->
+                            {% for field_name, field_errors in context_things.signup_form.errors.items() %}
+                                {% if field_name==field.name %}
+                                    {% for error in field_errors %}
+                                        <span style='color: red;'>{{ error }}</span>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                       {% endfor %}
+                        <p>
+                            <input type='submit' value='Submit'>
+                            {# <input type='button' value='Cancel'> #}
+                        </p>
+                    </div>
+                </form>
+              </div>  <!-- id="signup" -->
+
+
+
+              <div id="signout" class="red">
+                <div style="padding:30px;" class="red">
+                <!-- List signed-in users with 'sign out' links. If no user is signed in,
+                     don't show the table -->
+                    {% if context_things.signed_in_users == [] %}
+                        <p>No one is signed in</p>
+                    {% else %}
+                        <table>
+                            <tr>
+                                <!-- TODO: styles here -->
+                                <th width="30%" class="red whitetext">Name</th>
+                                <th width="20%" class="red whitetext">Volunteer?</th>
+                                <th width="30%" class="red whitetext">Time In</th>
+                                <th width="20%" class="red whitetext">Sign Out</th>
+                            </tr>
+                            {% for user in context_things.signed_in_users %}
+                                <tr>
+                                <!-- {# TODO: Note that here I'm doing the None check because I
+                                     created some Visits in the shell, without Users (i.e. that
+                                     field was None), so Flask complains that None does not
+                                     have get_time_in() and so forth........ So this would not
+                                     (should not?) happen in real life - i.e.  this check is
+                                     probably unnecessary. But note, another TODO: - something
+                                     to check with unit tests..... #}-->
+                                     {% if user %}
+                                        <td>{{ user }}</td>
+                                        <td>{{ user.add_to_volunt_list }}</td>
+                                        <td>{{ user.get_time_in() }}</td>
+                                        <td> <a href='/signout/{{ user.id }}'>Sign Out</a></td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
+                </div>
+            </div>  <!-- id="signout" -->
+
+        </div>   <!-- class = panel container -->
+
+    </div> <!-- id='tab-container' -->
+
+</div>  <!-- outer div for centering -->
+
+<!-- TODO: temp ................ if not, styles -->
+<div style="width: 300px; margin: 20px auto; text-align: center; background-color: #fff">
+    <a href="/stats">Statistics (temporarily here.....)</a>
 </div>
-
-
-    </div>
-
-
-
-    <div style="width: 300px; margin: 20px auto; text-align: center">
-        (footer)
-    </div>
-
 
 </body>
 </html>
