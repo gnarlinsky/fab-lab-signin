@@ -54,7 +54,7 @@
         * redirect to specified anchor
         ***************************************/
       $(document).ready( function() {
-        location = "#{{ context_things.anchor }}";
+        location = "#{{ anchor }}";
         });
     </script>
 </head>
@@ -114,7 +114,7 @@
                         -->#}
                         <div style="padding:30px;" class="green">
                             <p>What are you going to do today?</p>
-                               {% for field in context_things.signin_form %}
+                               {% for field in signin_form %}
                                   <!-- control placement of label relative to field (labels for
                                        text fields go before the field; checkbox labels go after
                                        the field -->
@@ -124,7 +124,7 @@
                                        <p>{{ field.label }} {{ field }}</p>
                                     {% endif %}
                                     <!-- loop through errors for this field -->
-                                    {% for field_name, field_errors in context_things.signin_form.errors.items() %}
+                                    {% for field_name, field_errors in signin_form.errors.items() %}
                                         {% if field_name==field.name %}
                                             {% for error in field_errors %}
                                                 <span style='color: red;'>{{ error }}</span>
@@ -141,7 +141,7 @@
               <div id="signup" class="blue">
                 <form action='/signup' method='post' name='signup' autocomplete='off'>
                     <div style="padding:30px" class="blue">
-                       {% for field in context_things.signup_form %}
+                       {% for field in signup_form %}
             <!-- control placement of label relative to field (labels for text fields go
                  before the field; checkbox labels go after the field -->
                         {% if field.type == 'BooleanField' %}
@@ -150,7 +150,7 @@
                          <p>{{ field.label }}: {{ field }}</p>
                          {% endif %}
                             <!-- loop through errors for this field -->
-                            {% for field_name, field_errors in context_things.signup_form.errors.items() %}
+                            {% for field_name, field_errors in signup_form.errors.items() %}
                                 {% if field_name==field.name %}
                                     {% for error in field_errors %}
                                         <span style='color: red;'>{{ error }}</span>
@@ -172,7 +172,7 @@
                 <div style="padding:30px;" class="red">
                 <!-- List signed-in users with 'sign out' links. If no user is signed in,
                      don't show the table -->
-                    {% if context_things.signed_in_users == [] %}
+                    {% if signed_in_users == [] %}
                         <p>No one is signed in</p>
                     {% else %}
                         <table>
@@ -183,7 +183,7 @@
                                 <th width="30%" class="red whitetext">Time In</th>
                                 <th width="20%" class="red whitetext">Sign Out</th>
                             </tr>
-                            {% for user in context_things.signed_in_users %}
+                            {% for user in signed_in_users %}
                                 <tr>
                                 <!-- {# TODO: Note that here I'm doing the None check because I
                                      created some Visits in the shell, without Users (i.e. that
