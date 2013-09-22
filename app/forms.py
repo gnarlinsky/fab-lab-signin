@@ -4,15 +4,15 @@ from flask.ext.wtf import Form, TextField, TextAreaField, BooleanField, Email,\
 class SignUpForm(Form):
     """ description go here """    # TODO
     user_name = TextField(label='Choose a User Name',
-                          validators=[Length(min=1, max=25),
-                          Required('Please provide a user name.')]
-                         )
+        validators=[Length(min=1, max=25),
+        Required('Please provide a user name.')]
+        )
     first_name = TextField(label='First Name',
-                           validators=[Required('Please provide your first name.')]
-                          )
+        validators=[Required('Please provide your first name.')]
+        )
     last_name = TextField(label='Last Name',
-                          validators=[Required('Please provide your last name.')]
-                         )
+        validators=[Required('Please provide your last name.')]
+        )
     # TODO: make note in docs:  The Optional validator must be there;
     # otherwise, it seems that the presence of the Email validator implies
     # Required validator.
@@ -23,10 +23,10 @@ class SignUpForm(Form):
     # not help.
     # (see similar comment in views.py)
     email = TextField(label='Email',
-                      validators=[Optional(strip_whitespace=True),
-                                  Email('Please provide a valid email address.'),
-                                 ]
-                     )
+        validators=[Optional(strip_whitespace=True),
+                    Email('Please provide a valid email address.'),
+                   ]
+        )
     add_to_announce_list = BooleanField(
         label='Can we add you to the announcement listserv?',
         default=False)
@@ -41,10 +41,9 @@ class SignUpForm(Form):
 class SignInForm(Form):
     """ description go here """    # TODO
     # TODO: is there a parameter for ``autocomplete='off'``?
-    # TODO:  user_name_or_email (?)
-    user_name = TextField(label='User Name',
-                          validators=[Required('Please provide your user name or email address.')]
-                          )
+    user_name_or_email = TextField(label='User Name or Email',
+        validators=[Required('Please provide your user name or email address.')]
+        )
 
     # Lab use checkboxes
     advice = BooleanField(label='Advice')
