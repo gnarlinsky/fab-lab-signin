@@ -125,7 +125,7 @@
                                     {% endif %}
                                     <!-- loop through errors for this field -->
                                     {% for field_name, field_errors in signin_form.errors.items() %}
-                                        {% if field_name==field.name %}
+                                        {% if field_name == field.name %}
                                             {% for error in field_errors %}
                                                 <span style='color: red;'>{{ error }}</span>
                                             {% endfor %}
@@ -133,77 +133,77 @@
                                     {% endfor %}
                                {% endfor %}
                                  <p><input type='submit' value='Sign In'></p>
+                            </div>
+                        </form>
+                    </div>  <!-- id='signin' -->
+
+
+                  <div id="signup" class="blue">
+                    <form action='/signup' method='post' name='signup' autocomplete='off'>
+                        <div style="padding:30px" class="blue">
+                           {% for field in signup_form %}
+                            <!-- control placement of label relative to field (labels for text fields go
+                                 before the field; checkbox labels go after the field -->
+                                {% if field.type == 'BooleanField' %}
+                                     <p>{{ field }} {{ field.label }}</p>
+                                 {% elif field.type == 'TextField' or field.type == 'TextAreaField' %}
+                                     <p>{{ field.label }}: {{ field }}</p>
+                                 {% endif %}
+                                 <!-- loop through errors for this field -->
+                                 {% for field_name, field_errors in signup_form.errors.items() %}
+                                    {% if field_name == field.name %}
+                                        {% for error in field_errors %}
+                                            <span style='color: red;'>{{ error }}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                           {% endfor %}
+                            <p>
+                                <input type='submit' value='Submit'>
+                                {# <input type='button' value='Cancel'> #}
+                            </p>
                         </div>
                     </form>
-                </div>  <!-- id='signin' -->
-
-
-              <div id="signup" class="blue">
-                <form action='/signup' method='post' name='signup' autocomplete='off'>
-                    <div style="padding:30px" class="blue">
-                       {% for field in signup_form %}
-            <!-- control placement of label relative to field (labels for text fields go
-                 before the field; checkbox labels go after the field -->
-                        {% if field.type == 'BooleanField' %}
-                         <p>{{ field }} {{ field.label }}</p>
-                         {% elif field.type == 'TextField' or field.type == 'TextAreaField' %}
-                         <p>{{ field.label }}: {{ field }}</p>
-                         {% endif %}
-                            <!-- loop through errors for this field -->
-                            {% for field_name, field_errors in signup_form.errors.items() %}
-                                {% if field_name==field.name %}
-                                    {% for error in field_errors %}
-                                        <span style='color: red;'>{{ error }}</span>
-                                    {% endfor %}
-                                {% endif %}
-                            {% endfor %}
-                       {% endfor %}
-                        <p>
-                            <input type='submit' value='Submit'>
-                            {# <input type='button' value='Cancel'> #}
-                        </p>
-                    </div>
-                </form>
-              </div>  <!-- id="signup" -->
+                  </div>  <!-- id="signup" -->
 
 
 
-              <div id="signout" class="red">
-                <div style="padding:30px;" class="red">
-                <!-- List signed-in users with 'sign out' links. If no user is signed in,
-                     don't show the table -->
-                    {% if signed_in_users == [] %}
-                        <p>No one is signed in</p>
-                    {% else %}
-                        <table>
-                            <tr>
-                                <!-- TODO: styles here -->
-                                <th width="30%" class="red whitetext">Name</th>
-                                <th width="20%" class="red whitetext">Volunteer?</th>
-                                <th width="30%" class="red whitetext">Time In</th>
-                                <th width="20%" class="red whitetext">Sign Out</th>
-                            </tr>
-                            {% for user in signed_in_users %}
+                  <div id="signout" class="red">
+                    <div style="padding:30px;" class="red">
+                    <!-- List signed-in users with 'sign out' links. If no user is signed in,
+                         don't show the table -->
+                        {% if signed_in_users == [] %}
+                            <p>No one is signed in</p>
+                        {% else %}
+                            <table>
                                 <tr>
-                                <!-- {# TODO: Note that here I'm doing the None check because I
-                                     created some Visits in the shell, without Users (i.e. that
-                                     field was None), so Flask complains that None does not
-                                     have get_time_in() and so forth........ So this would not
-                                     (should not?) happen in real life - i.e.  this check is
-                                     probably unnecessary. But note, another TODO: - something
-                                     to check with unit tests..... #}-->
-                                     {% if user %}
-                                        <td>{{ user }}</td>
-                                        <td>{{ user.add_to_volunt_list }}</td>
-                                        <td>{{ user.get_time_in() }}</td>
-                                        <td> <a href='/signout/{{ user.id }}'>Sign Out</a></td>
-                                    {% endif %}
+                                    <!-- TODO: styles here -->
+                                    <th width="30%" class="red whitetext">Name</th>
+                                    <th width="20%" class="red whitetext">Volunteer?</th>
+                                    <th width="30%" class="red whitetext">Time In</th>
+                                    <th width="20%" class="red whitetext">Sign Out</th>
                                 </tr>
-                            {% endfor %}
-                        </table>
-                    {% endif %}
-                </div>
-            </div>  <!-- id="signout" -->
+                                {% for user in signed_in_users %}
+                                    <tr>
+                                    <!-- {# TODO: Note that here I'm doing the None check because I
+                                         created some Visits in the shell, without Users (i.e. that
+                                         field was None), so Flask complains that None does not
+                                         have get_time_in() and so forth........ So this would not
+                                         (should not?) happen in real life - i.e.  this check is
+                                         probably unnecessary. But note, another TODO: - something
+                                         to check with unit tests..... #}-->
+                                         {% if user %}
+                                            <td>{{ user }}</td>
+                                            <td>{{ user.add_to_volunt_list }}</td>
+                                            <td>{{ user.get_time_in() }}</td>
+                                            <td> <a href='/signout/{{ user.id }}'>Sign Out</a></td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        {% endif %}
+                    </div>
+                </div>  <!-- id="signout" -->
 
         </div>   <!-- class = panel container -->
 
