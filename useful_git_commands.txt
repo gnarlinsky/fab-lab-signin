@@ -8,3 +8,18 @@ Apply only the specified commit(s) to current branch:
 ```
 $ git cherry-pick <commit>
 ```
+
+
+Draft part
+-------------
+```
+$ git checkout <branch>
+$ git commit (-a vs * ..................)
+$ git push
+$ git init
+```
+* Merging branches
+* Plumbing vs porcelain
+* Command line vs graphical
+* git clone
+* link to setting up ssh key
