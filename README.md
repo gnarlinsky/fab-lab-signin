@@ -10,5 +10,7 @@ Installing and Running
 * Clone this repository
 * Set up and activate a virtual environment
 * ```$ pip install -r requirements.txt```
+* ```$ python db_create.py```
+* optional: ```$python make_fakes.py``` (create initial data)
 * ```$ python run.py```
 *  Go to http://127.0.0.1:5000/signin
