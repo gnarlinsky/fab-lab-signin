@@ -1,0 +1,10 @@
+Instead of showing the full 40-byte hexadecimal commit object name, show
+only a partial prefix:
+```
+$ git log --abbrev-commit
+```
+
+Apply only the specified commit(s) to current branch:
+```
+$ git cherry-pick <commit>
+```
