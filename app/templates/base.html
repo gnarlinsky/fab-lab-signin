@@ -140,7 +140,7 @@
 
                   <div id="signup" class="blue">
                     <form action='/signup' method='post' name='signup' autocomplete='off'>
-                        <div style="padding:30px" class="blue">
+                        <div style="padding:30px; color: white" class="blue">
                            {% for field in signup_form %}
                             <!-- control placement of label relative to field (labels for text fields go
                                  before the field; checkbox labels go after the field -->
@@ -179,7 +179,6 @@
                                 <tr>
                                     <!-- TODO: styles here -->
                                     <th width="30%" class="red whitetext">Name</th>
-                                    <th width="20%" class="red whitetext">Volunteer?</th>
                                     <th width="30%" class="red whitetext">Time In</th>
                                     <th width="20%" class="red whitetext">Sign Out</th>
                                 </tr>
@@ -194,7 +193,6 @@
                                          to check with unit tests..... #}-->
                                          {% if user %}
                                             <td>{{ user }}</td>
-                                            <td>{{ user.add_to_volunt_list }}</td>
                                             <td>{{ user.get_time_in() }}</td>
                                             <td> <a href='/signout/{{ user.id }}'>Sign Out</a></td>
                                         {% endif %}
