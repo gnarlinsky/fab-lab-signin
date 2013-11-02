@@ -1,13 +1,14 @@
+A Selection of Necessary and Useful Git Commands: a (sort of) Quick Reference
+==============================================================================
+
+Misc
+-----------
 Instead of showing the full 40-byte hexadecimal commit object name, show
 only a partial prefix:
-```
-$ git log --abbrev-commit
-```
+``` $ git log --abbrev-commit ```
 
 Apply only the specified commit(s) to current branch:
-```
-$ git cherry-pick <commit>
-```
+``` $ git cherry-pick <commit> ```
 
 
 Draft part
@@ -18,8 +19,33 @@ $ git commit (-a vs * ..................)
 $ git push
 $ git init
 ```
+
+
+
+Committing
+------------
+* Add file contents to the index . . . updates the index using the current
+content found in the working tree, to prepare the content staged for the next
+commit.
+```
+ $ git add <file(s)>
+```
+
+* Stores the current contents of the index in a new commit along with a log
+message from the user describing the changes.  ... by using the -a switch with
+the commit command to automatically "add" changes from all known files (i.e.
+all files that are already listed in the index) and to automatically "rm" files
+in the index that have been removed from the working tree, and then perform the
+actual commit
+ ```
+ $ git commit <file(s)> [-m <message>]
+ ```
+
+Also:
 * Merging branches
 * Plumbing vs porcelain
 * Command line vs graphical
 * git clone
 * link to setting up ssh key
+* References and notes
+  * Much of this is taken from the git manual pages, some verbatim.
