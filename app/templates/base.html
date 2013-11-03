@@ -125,19 +125,31 @@
                         </p>
                         -->#}
                         <div style="padding:30px;" class="green">
-                            <p>What are you planning to do today? (Mark all that apply.)
+                                <p>{{ signin_form.user_name_or_email.label }}: {{ signin_form.user_name_or_email }}<p>
+                                    {% for field_name, field_errors in signin_form.errors.items() %}
+                                        {% if field_name ==
+                                        signin_form.user_name_or_email.name %}
+                                            {% for error in field_errors %}
+                                            <div style="text-align: right">
+                                                <span id="error">{{ error }}</span>
+                                                </div>
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endfor %}
 
-                            <p>{{ signin_form.dont_know }}{{ signin_form.dont_know.label }}<p>
-                            <p>{{ signin_form.volunteer }}{{ signin_form.volunteer.label }}<p>
-                            <p>{{ signin_form.get_help }}{{ signin_form.get_help.label }}<p>
-                            <p>{{ signin_form.hangout }}{{ signin_form.hangout.label }}<p>
-                            <p>{{ signin_form.computer }}{{ signin_form.computer.label }}<p>
-                            <p>{{ signin_form.electronics_room }}{{ signin_form.electronics_room.label }}<p>
-                            <p>{{ signin_form.laser_engraver }}{{ signin_form.laser_engraver.label }}<p>
-                            <p>{{ signin_form.milling_machine }}{{ signin_form.milling_machine.label }}<p>
-                            <p>{{ signin_form.three_d_printing }}{{ signin_form.three_d_printing.label }}<p>
-                            <p>{{ signin_form.tour }}{{ signin_form.tour.label }}<p>
-                            <p>{{ signin_form.vinyl_cutter }}{{ signin_form.vinyl_cutter.label }}<p>
+                                <p style="padding-top:5px;">What are you planning to do today? (Mark all that apply.)
+
+                                <p>{{ signin_form.dont_know }}{{ signin_form.dont_know.label }}<p>
+                                <p>{{ signin_form.volunteer }}{{ signin_form.volunteer.label }}<p>
+                                <p>{{ signin_form.get_help }}{{ signin_form.get_help.label }}<p>
+                                <p>{{ signin_form.hangout }}{{ signin_form.hangout.label }}<p>
+                                <p>{{ signin_form.computer }}{{ signin_form.computer.label }}<p>
+                                <p>{{ signin_form.electronics_room }}{{ signin_form.electronics_room.label }}<p>
+                                <p>{{ signin_form.laser_engraver }}{{ signin_form.laser_engraver.label }}<p>
+                                <p>{{ signin_form.milling_machine }}{{ signin_form.milling_machine.label }}<p>
+                                <p>{{ signin_form.three_d_printing }}{{ signin_form.three_d_printing.label }}<p>
+                                <p>{{ signin_form.tour }}{{ signin_form.tour.label }}<p>
+                                <p>{{ signin_form.vinyl_cutter }}{{ signin_form.vinyl_cutter.label }}<p>
 
                                <p onclick="toggle_visibility('project_types')">
                                    {{ signin_form.project }}{{ signin_form.project.label }} </p>
@@ -173,48 +185,6 @@
                                 </div>
 
 
-                                {#
-                                <!--
-                               {% for field in signin_form %}
-                                    {% if field.name == 'project' %}
-                                       <p>{{ field }} {{ field.label }}</p>
-                                       <p>{{ signin_form.project_art.label }}
-                                    -->
-                                    <!-- 
-
-                                    {% elif field.name != 'project_art' %}
-                                        <p> Not project_art </p>
-                                    {% endif %}
-                                    -->
-
-
-
-
-
-
-                                  <!-- control placement of label relative to field (labels for
-                                       text fields go before the field; checkbox labels go after
-                                       the field -->
-                                    <!-- 
-                                    {% if field.type == 'BooleanField' %}
-                                       <p>{{ field }} {{ field.label }}</p>
-                                   {% elif field.type ==  'TextField'  or field.type == 'TextAreaField' %}
-                                       <p>{{ field.label }} {{ field }}</p>
-                                    {% endif %}
-                                    -->
-                                    #}
-
-                                    <!-- loop through errors for this field -->
-                                    {% for field_name, field_errors in signin_form.errors.items() %}
-                                        {% if field_name == field.name %}
-                                            {% for error in field_errors %}
-                                                <span style='color: red;'>{{ error }}</span>
-                                            {% endfor %}
-                                        {% endif %}
-                                    {% endfor %}
-                                    {#
-                               {% endfor %}
-                               #}
                                  <p><input id="submit_button" type='submit' value='Sign In'></p>
                             </div>
                         </form>
@@ -236,14 +206,13 @@
                                  {% for field_name, field_errors in signup_form.errors.items() %}
                                     {% if field_name == field.name %}
                                         {% for error in field_errors %}
-                                            <span style='color: red;'>{{ error }}</span>
+                                            <span id="error">{{ error }}</span>
                                         {% endfor %}
                                     {% endif %}
                                 {% endfor %}
                            {% endfor %}
                             <p>
                                 <input id='submit_button' type='submit' value='Submit'>
-                                {# <input type='button' value='Cancel'> #}
                             </p>
                         </div>
                     </form>
