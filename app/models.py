@@ -102,6 +102,7 @@ class Visit(db.Model):
     project_business= db.Column(db.Boolean)
     project_research = db.Column(db.Boolean)
     project_other = db.Column(db.String)
+    projects = db.Column(db.String)
     for_class = db.Column(db.Boolean)
     which_class = db.Column(db.String)
     other = db.Column(db.Boolean)
