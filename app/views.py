@@ -45,18 +45,38 @@ def signin():
                     user.get_time_in())
                 flash(messg, category='warning')
             else:
+                # determine which project(s) exactly, if one was chosen
+                # TODO: a more elegant way to do that
+                chosen_projects = []
+                if signin_form.project.data:
+                    for project in [signin_form.project_art,
+                                    signin_form.project_business,
+                                    signin_form.project_research,
+                                    signin_form.project_other
+                                   ]:
+                        if project.data: # if was checked or filled out
+                            chosen_projects.append(str(project.data))
+                chosen_proj_str = '; '.join(chosen_projects)
                 # if not already signed, create and save Visit instance
                 new_visit = Visit(signin_timestamp=datetime.now(),
                                   user_id=user.id,
-                                  advice=signin_form.advice.data,
+                                  hangout=signin_form.hangout.data,
+                                  get_help=signin_form.get_help.data,
                                   computer=signin_form.computer.data,
+                                  volunteer=signin_form.volunteer.data,
                                   dont_know=signin_form.dont_know.data,
                                   electronics_room=signin_form.electronics_room.data,
                                   laser_engraver=signin_form.laser_engraver.data,
                                   milling_machine=signin_form.milling_machine.data,
-                                  three_d_printer=signin_form.three_d_printer.data,
+                                  three_d_printing=signin_form.three_d_printing.data,
                                   tour=signin_form.tour.data,
                                   vinyl_cutter=signin_form.vinyl_cutter.data,
+                                  project = signin_form.project.data,
+                                  project_art = signin_form.project_art.data,
+                                  project_business = signin_form.project_business.data,
+                                  project_research = signin_form.project_research.data,
+                                  project_other = signin_form.project_other.data,
+                                  projects = chosen_proj_str,
                                   for_class=signin_form.for_class.data,
                                   which_class=signin_form.which_class.data,
                                   other=signin_form.other.data,
@@ -77,35 +97,6 @@ def signin():
                                signed_in_users=get_signed_in_users())
 
     return redirect(url_for('.index'))
-
-
-def signout_user(user_id):
-    ###########################################################################
-    # Set signout timestamp for this user's current visit, and display message
-    ###########################################################################
-    # get this user, or send error messg if no user with this id
-    # TODO:  Maybe should do try/except here with
-    # User.query.all()[user_id] but nested try/except seemed less readable
-    # here. Or do this check earlier in signout(). Investigate best practices
-    user = User.query.get(user_id)
-    if not user:
-        messg = 'No such user'
-        flash(messg, category='error')
-    else:
-        # Add signout_timestamp to this Visit, unless there is no current visit
-        # (e.g. there may be no signout_timestamp -- which is involved in
-        # get_current_visit() -- meaning that this user has already signed out or
-        # never signed in.)
-        try:
-            this_visit = user.get_current_visit()
-            this_visit.signout_timestamp = datetime.now()
-            db.session.commit()
-
-            messg = '{} signed out. {}'.format(user.user_name,'[insert option to Undo?]') 
-            flash(messg, category='info')
-        except:
-            messg = '{} was not signed in, and so cannot be signed out'.format(user.user_name)
-            flash(messg, category='error')
 
 
 @app.route('/signout/<user_id>', methods=['GET', 'POST'])
@@ -131,7 +122,7 @@ def signout(user_id=None):
             this_visit.signout_timestamp = datetime.now()
             db.session.commit()
 
-            messg = '{} signed out. {}'.format(user.user_name,'[insert option to Undo?]') 
+            messg = user.user_name + ' signed out.'
             flash(messg, category='info')
         except:
             messg = '{} was not signed in, and so cannot be signed out'.format(user.user_name)
