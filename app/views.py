@@ -127,9 +127,11 @@ def signout(user_id=None):
         try:
             # TODO: double check that try/except makes sense with
             # get_current_visit() possible return values
-            this_visit = user.get_current_visit()
-            this_visit.signout_timestamp = datetime.now()
-            db.session.commit()
+            #this_visit = user.get_current_visit()
+            curr_visits = user.get_current_visits()
+            for visit in curr_visits:
+                visit.signout_timestamp = datetime.now()
+                db.session.commit()
 
             messg = '{} signed out. {}'.format(user.user_name,'[insert option to Undo?]') 
             flash(messg, category='info')

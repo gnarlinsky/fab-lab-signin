@@ -20,6 +20,16 @@ class User(db.Model):
     how_heard = db.Column(db.Text)
     visits = db.relationship('Visit', backref='visitor', lazy='dynamic')
 
+    def get_current_visits(self):
+        """ Return all current Visits (i.e. those that lack a signout_timestamp
+        or autosignout_timestamp, because this theoretically indicates that the
+        user is still in the lab.
+        """
+        # get all Visits from which user has not signed out
+        signed_in_visits = self.visits.filter_by(signout_timestamp=None,
+                                                 auto_signout_timestamp=None)
+        return signed_in_visits
+
     def get_current_visit(self):
         """ Return latest Visit object, based on the last Visit associated with
         this User that lacks a signout_timestamp or autosignout_timestamp,
@@ -76,15 +86,22 @@ class Visit(db.Model):
     auto_signout_timestamp = db.Column(db.DateTime)
 
     # lab use for this visit
-    advice = db.Column(db.Boolean)
-    computer = db.Column(db.Boolean)
     dont_know = db.Column(db.Boolean)
+    volunteer = db.Column(db.Boolean)
+    get_help = db.Column(db.Boolean)
+    hangout = db.Column(db.Boolean)
+    computer = db.Column(db.Boolean)
     electronics_room = db.Column(db.Boolean)
     laser_engraver = db.Column(db.Boolean)
     milling_machine = db.Column(db.Boolean)
-    three_d_printer = db.Column(db.Boolean)
+    three_d_printing = db.Column(db.Boolean)
     tour = db.Column(db.Boolean)
     vinyl_cutter = db.Column(db.Boolean)
+    project = db.Column(db.Boolean)
+    project_art= db.Column(db.Boolean)
+    project_business= db.Column(db.Boolean)
+    project_research = db.Column(db.Boolean)
+    project_other = db.Column(db.String)
     for_class = db.Column(db.Boolean)
     which_class = db.Column(db.String)
     other = db.Column(db.Boolean) # TODO: associate with its textfield
