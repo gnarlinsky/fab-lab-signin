@@ -3,7 +3,7 @@ from flask.ext.wtf import Form, TextField, TextAreaField, BooleanField, Email,\
 
 class SignUpForm(Form):
     """ description go here """    # TODO
-    user_name = TextField(label='Choose a User Name',
+    user_name = TextField(label='User Name',
         validators=[Length(min=1, max=25),
         Required('Please provide a user name.')]
         )
@@ -34,8 +34,8 @@ class SignUpForm(Form):
         label='Can we add you to the volunteer listserv?',
         default=False)
     is_uiuc_student = BooleanField(label='Are you a student at UIUC?')
-    who_are_you = TextAreaField(label='If not, please tell us what you do')
-    how_heard = TextAreaField(label='How did you hear about us?')
+    who_are_you = TextField(label='If not, please tell us what you do')
+    how_heard = TextField(label='How did you hear about us?')
 
 
 class SignInForm(Form):
@@ -64,5 +64,5 @@ class SignInForm(Form):
     project_other = TextField(label='Other')
     for_class = BooleanField(label='For a class')
     which_class = TextField(label='Which class?')
-    other = BooleanField(label='Other', description='Please describe in box below')
-    other_text = TextAreaField(label='If other please describe here')
+    other = BooleanField(label='Other')
+    other_text = TextField(label='Please describe:')
