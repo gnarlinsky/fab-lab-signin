@@ -27,35 +27,47 @@
         /***************************************
         * easytabs
         ***************************************/
-      $(document).ready( function() {
-        $('#tab-container').easytabs({
-        animate: false,
-        /*
-        transitionCollapse: 'show', */
-        /* clicking again on same tab, stay
-        there */
+        $(document).ready( function() {
+            $('#tab-container').easytabs({
+            animate: false,
+            /*
+            transitionCollapse: 'show', */
+            /* clicking again on same tab, stay
+            there */
 
-        /*
-        collapsible: true,
-        transitionCollapse: 'slideUp',
-        transitionIn: 'slideDown',
-        transitionInEasing: 'swing',
-        transitionOut: 'slideUp',
-        transitionIn: 'fadeIn',
-        transitionOut: 'hide',
-        transitionInEasing: 'linear',
-        collapsedByDefault: true,
-        */
-        collapsedByDefault: false, 
-        tabs: "> div > ul > li",
+            /*
+            collapsible: true,
+            transitionCollapse: 'slideUp',
+            transitionIn: 'slideDown',
+            transitionInEasing: 'swing',
+            transitionOut: 'slideUp',
+            transitionIn: 'fadeIn',
+            transitionOut: 'hide',
+            transitionInEasing: 'linear',
+            collapsedByDefault: true,
+            */
+            collapsedByDefault: false,
+            tabs: "> div > ul > li",
+            });
         });
-      });
+
         /***************************************
         * redirect to specified anchor
         ***************************************/
-      $(document).ready( function() {
-        location = "#{{ anchor }}";
+        $(document).ready( function() {
+            location = "#{{ anchor }}";
         });
+
+        /***************************************
+        * toggle_visibility certain fiels
+        ***************************************/
+        function toggle_visibility(id) {
+            var elem = document.getElementById(id);
+            if (elem.style.display == 'block')
+                elem.style.display = 'none';
+            else
+                elem.style.display = 'block';
+            }
     </script>
 </head>
 <body>
@@ -113,17 +125,85 @@
                         </p>
                         -->#}
                         <div style="padding:30px;" class="green">
-                            <p>What are you planning to do today? (Mark as many
-                            as apply.)
+                            <p>What are you planning to do today? (Mark all that apply.)
+
+                            <p>{{ signin_form.dont_know }}{{ signin_form.dont_know.label }}<p>
+                            <p>{{ signin_form.volunteer }}{{ signin_form.volunteer.label }}<p>
+                            <p>{{ signin_form.get_help }}{{ signin_form.get_help.label }}<p>
+                            <p>{{ signin_form.hangout }}{{ signin_form.hangout.label }}<p>
+                            <p>{{ signin_form.computer }}{{ signin_form.computer.label }}<p>
+                            <p>{{ signin_form.electronics_room }}{{ signin_form.electronics_room.label }}<p>
+                            <p>{{ signin_form.laser_engraver }}{{ signin_form.laser_engraver.label }}<p>
+                            <p>{{ signin_form.milling_machine }}{{ signin_form.milling_machine.label }}<p>
+                            <p>{{ signin_form.three_d_printing }}{{ signin_form.three_d_printing.label }}<p>
+                            <p>{{ signin_form.tour }}{{ signin_form.tour.label }}<p>
+                            <p>{{ signin_form.vinyl_cutter }}{{ signin_form.vinyl_cutter.label }}<p>
+
+                               <p onclick="toggle_visibility('project_types')">
+                                   {{ signin_form.project }}{{ signin_form.project.label }} </p>
+                               <div id="project_types" style="display:none">
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        {{ signin_form.project_art }} {{ signin_form.project_art.label }}
+                                    </p>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        {{ signin_form.project_business }} {{ signin_form.project_business.label }}
+                                    </p>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        {{ signin_form.project_research }} {{ signin_form.project_research.label }}
+                                    </p>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    {{ signin_form.project_other.label }}: {{ signin_form.project_other }} 
+                                    </p>
+                                </div>
+
+                               <p onclick="toggle_visibility('which_class')">
+                                   {{ signin_form.for_class }}{{ signin_form.for_class.label }}</p>
+                               <div id="which_class" style="display:none">
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        {{ signin_form.which_class.label }} {{ signin_form.which_class }}
+                                    </p>
+                                </div>
+
+                               <p onclick="toggle_visibility('other_reason')">
+                                   {{ signin_form.other }}{{ signin_form.other.label }}</p>
+                               <div id="other_reason" style="display:none">
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        {{ signin_form.other_text.label }} {{ signin_form.other_text }}
+                                    </p>
+                                </div>
+
+
+                                {#
+                                <!--
                                {% for field in signin_form %}
+                                    {% if field.name == 'project' %}
+                                       <p>{{ field }} {{ field.label }}</p>
+                                       <p>{{ signin_form.project_art.label }}
+                                    -->
+                                    <!-- 
+
+                                    {% elif field.name != 'project_art' %}
+                                        <p> Not project_art </p>
+                                    {% endif %}
+                                    -->
+
+
+
+
+
+
                                   <!-- control placement of label relative to field (labels for
                                        text fields go before the field; checkbox labels go after
                                        the field -->
+                                    <!-- 
                                     {% if field.type == 'BooleanField' %}
                                        <p>{{ field }} {{ field.label }}</p>
                                    {% elif field.type ==  'TextField'  or field.type == 'TextAreaField' %}
                                        <p>{{ field.label }} {{ field }}</p>
                                     {% endif %}
+                                    -->
+                                    #}
+
                                     <!-- loop through errors for this field -->
                                     {% for field_name, field_errors in signin_form.errors.items() %}
                                         {% if field_name == field.name %}
@@ -132,21 +212,23 @@
                                             {% endfor %}
                                         {% endif %}
                                     {% endfor %}
+                                    {#
                                {% endfor %}
-                                 <p><input type='submit' value='Sign In'></p>
+                               #}
+                                 <p><input id="submit_button" type='submit' value='Sign In'></p>
                             </div>
                         </form>
                     </div>  <!-- id='signin' -->
 
 
-                  <div id="signup" class="blue">
+                  <div id="signup" class="blue" style="text-align: right;">
                     <form action='/signup' method='post' name='signup' autocomplete='off'>
                         <div style="padding:30px; color: white" class="blue">
                            {% for field in signup_form %}
                             <!-- control placement of label relative to field (labels for text fields go
                                  before the field; checkbox labels go after the field -->
                                 {% if field.type == 'BooleanField' %}
-                                     <p>{{ field }} {{ field.label }}</p>
+                                     <p>&nbsp;{{ field }} {{ field.label }}</p>
                                  {% elif field.type == 'TextField' or field.type == 'TextAreaField' %}
                                      <p>{{ field.label }}: {{ field }}</p>
                                  {% endif %}
@@ -160,7 +242,7 @@
                                 {% endfor %}
                            {% endfor %}
                             <p>
-                                <input type='submit' value='Submit'>
+                                <input id='submit_button' type='submit' value='Submit'>
                                 {# <input type='button' value='Cancel'> #}
                             </p>
                         </div>

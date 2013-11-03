@@ -104,8 +104,8 @@ class Visit(db.Model):
     project_other = db.Column(db.String)
     for_class = db.Column(db.Boolean)
     which_class = db.Column(db.String)
-    other = db.Column(db.Boolean) # TODO: associate with its textfield
-    other_text = db.Column(db.Text)  # TODO: to associate with its checkbox
+    other = db.Column(db.Boolean)
+    other_text = db.Column(db.Text)
     # TODO: question -- db.Text vs db.String
 
     def __repr__(self):
