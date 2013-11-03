@@ -241,6 +241,8 @@ input[type="text"] {
     padding: 5px;
     background: rgb(224, 224, 224);
     margin: 0 0 1px 0;
+    margin-top: 5px;
+    margin-bottom: 0px;
     border-radius: 4px; 
     width: 25em; 
     font-size: 0.8em;
@@ -265,9 +267,25 @@ input#submit_button {
     background : -o-linear-gradient(top, #ffffff 0%, #f1f1f1 49%, #e1e1e1 51%, #f6f6f6 100%);
     background : -ms-linear-gradient(top, #ffffff 0%, #f1f1f1 49%, #e1e1e1 51%, #f6f6f6 100%);
     background : linear-gradient(top, #ffffff 0%, #f1f1f1 49%, #e1e1e1 51%, #f6f6f6 100%);
-
-
 }
+
+#signin span#error {
+    /*color: red;*/
+    color: rgb(173, 0, 0);
+    text-align: right;
+    margin-left: 20px;
+    font-style: italic;
+    /*text-shadow: -1px -1px 2px black;*/
+}
+
+#signup span#error {
+    color: red;
+    text-align: right;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
 
 /*
 #signout p {
