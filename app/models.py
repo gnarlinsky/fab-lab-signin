@@ -1,11 +1,6 @@
 from app import db
 from sqlalchemy.sql import desc
 
-# TODO
-# we will have admin users and regular users
-#ROLE_USER = 0
-#ROLE_ADMIN = 1
-
 class User(db.Model):
     """ Describe here, including lack of password issue """
     id = db.Column(db.Integer, primary_key=True)
@@ -71,9 +66,17 @@ class User(db.Model):
             return False
 
     def __repr__(self):
-        """ docstring pls """
+        """ Define string representation of User object """
         # TODO:  not guaranteed to be unique
-        return '{} ({} {})'.format(self.user_name, self.first_name, self.last_name)
+
+        if (not self.first_name and not self.last_name):
+            # don't include the parentheses if user did not provide both first
+            # and last name;
+            return self.user_name
+        else:
+            return '{} ({} {})'.format(self.user_name,
+                                       self.first_name,
+                                       self.last_name)
 
 
 class Visit(db.Model):
@@ -107,7 +110,7 @@ class Visit(db.Model):
     which_class = db.Column(db.String)
     other = db.Column(db.Boolean)
     other_text = db.Column(db.Text)
-    # TODO: question -- db.Text vs db.String
+    # TODO: db.Text vs db.String
 
     def __repr__(self):
         """ Describe a Visit in terms of sign-in and sign-out time.

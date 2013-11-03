@@ -55,6 +55,10 @@ def signin():
                                     signin_form.project_other
                                    ]:
                         if project.data: # if was checked or filled out
+                            # TODO: Nope! This will append "True" and "False",
+                            # not "Art", etc.  So might want to do
+                            # project.label for the checkbox choices.
+                            # See Issue #31
                             chosen_projects.append(str(project.data))
                 chosen_proj_str = '; '.join(chosen_projects)
                 # if not already signed, create and save Visit instance

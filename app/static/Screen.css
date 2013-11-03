@@ -271,7 +271,7 @@ input#submit_button {
 
 #signin span#error {
     /*color: red;*/
-    color: rgb(173, 0, 0);
+    color: rgb(121, 0, 0);
     text-align: right;
     margin-left: 20px;
     font-style: italic;
@@ -284,6 +284,12 @@ input#submit_button {
     margin-left: 20px;
     margin-bottom: 20px;
     font-style: italic;
+}
+
+#required {
+    color: rgb(245, 255, 0);
+    font-style: italic;
+    padding-right: 20em;
 }
 
 

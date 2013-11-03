@@ -125,17 +125,20 @@
                         </p>
                         -->#}
                         <div style="padding:30px;" class="green">
-                                <p>{{ signin_form.user_name_or_email.label }}: {{ signin_form.user_name_or_email }}<p>
-                                    {% for field_name, field_errors in signin_form.errors.items() %}
-                                        {% if field_name ==
-                                        signin_form.user_name_or_email.name %}
-                                            {% for error in field_errors %}
-                                            <div style="text-align: right">
-                                                <span id="error">{{ error }}</span>
-                                                </div>
-                                            {% endfor %}
-                                        {% endif %}
-                                    {% endfor %}
+                                <p>
+                                    <span id="required">Required</span><br>
+                                    {{ signin_form.user_name_or_email.label }}: {{ signin_form.user_name_or_email }}
+                                </p>
+                                {% for field_name, field_errors in signin_form.errors.items() %}
+                                    {% if field_name ==
+                                    signin_form.user_name_or_email.name %}
+                                        {% for error in field_errors %}
+                                        <div style="text-align: right">
+                                            <span id="error">{{ error }}</span>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
 
                                 <p style="padding-top:5px;">What are you planning to do today? (Mark all that apply.)
 
@@ -197,6 +200,9 @@
                            {% for field in signup_form %}
                             <!-- control placement of label relative to field (labels for text fields go
                                  before the field; checkbox labels go after the field -->
+                                 {% if field.name == 'user_name' %}
+                                    <span id="required">Required</span><br>
+                                {% endif %}
                                 {% if field.type == 'BooleanField' %}
                                      <p>&nbsp;{{ field }} {{ field.label }}</p>
                                  {% elif field.type == 'TextField' or field.type == 'TextAreaField' %}

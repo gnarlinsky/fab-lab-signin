@@ -4,15 +4,15 @@ from flask.ext.wtf import Form, TextField, TextAreaField, BooleanField, Email,\
 class SignUpForm(Form):
     """ description go here """    # TODO
     user_name = TextField(label='User Name',
-        validators=[Length(min=1, max=25),
-        Required('Please provide a user name.')]
-        )
+                          validators=[Length(min=1, max=25),
+                          Required('Please provide a user name.')]
+                         )
     first_name = TextField(label='First Name',
-        validators=[Required('Please provide your first name.')]
-        )
+                           validators=[Optional(strip_whitespace=True)]
+                          )
     last_name = TextField(label='Last Name',
-        validators=[Required('Please provide your last name.')]
-        )
+                          validators=[Optional(strip_whitespace=True)]
+                         )
     # TODO: make note in docs:  The Optional validator must be there;
     # otherwise, it seems that the presence of the Email validator implies
     # Required validator.
@@ -61,7 +61,7 @@ class SignInForm(Form):
     project_art = BooleanField(label='Art')
     project_business = BooleanField(label='Business')
     project_research = BooleanField(label='Research')
-    project_other = TextField(label='Other')
+    project_other = TextField(label='Other', default="Unspecified")
     for_class = BooleanField(label='For a class')
     which_class = TextField(label='Which class?')
     other = BooleanField(label='Other')
