@@ -29,9 +29,7 @@ def create_fakes(num_visitors, num_visits):
     #############################
     # Create some fake visits
     #############################
-
     visits = []
-
 
     for i in range(num_visits):
         # determine type of signout
