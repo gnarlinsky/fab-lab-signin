@@ -77,10 +77,10 @@ if __name__ == '__main__':
         print 'Aborting'
         exit()
     else:
-        print 'Deleting old db and creating new one .......'
+        print '\nDeleting old db and creating new one .......'
         os.system('rm -f ' + db_name)
         os.system('python db_create.py')
 
 
-    print 'Creating visits and visitors....'
+    print '\Creating visits and visitors....'
     create_fakes(num_visitors=10, num_visits=30)
