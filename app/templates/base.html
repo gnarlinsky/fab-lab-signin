@@ -87,19 +87,19 @@
 
     <!-- outer div for centering -->
     <div style="margin:0 auto; width:600px;">
-
-
         <div id="tab-container" class="tab-container">
-
-            <a href="/index#signin"><img src="{{ url_for('static', filename='Logo.jpg') }}"
-            alt="Champaign-Urbana Community Fab Lab" width="600" height="450" /></a>
+            <div id="fablab_logo_top" style="margin-left:30px; margin-right:30px; background-color:white;">
+                <a href="/index#signin">
+                    <img src="{{ url_for('static', filename='Logo.jpg') }}" alt="Champaign-Urbana Community Fab Lab" width="600" height="450" />
+                </a>
+            </div>
             <div id="buttons">
                 <!-- <ul class="etabs"> -->
                 <ul>
                 <!-- <li><a href="#createaccount" class="blue tab">Create Account</a></li> -->
-                    <li><a href="#signup" class="blue tab">Create Account</a></li>
-                    <li><a href="#signin" class="green tab">Sign In</a></li>
-                    <li><a href="#signout" class="red tab">Sign Out</a></li>
+                    <li><a href="#signup" class="blue tab" style="width: 220">Create Account</a></li>
+                    <li><a href="#signin" class="green tab" style="width: 220">Sign In</a></li>
+                    <li><a href="#signout" class="red tab" style="width: 220">Sign Out</a></li>
                 </ul>
                 <br class="clear" />
             </div>
@@ -126,8 +126,10 @@
                         -->#}
                         <div style="padding:30px;" class="green">
                                 <p>
-                                    <span id="required">Required</span><br>
-                                    {{ signin_form.user_name_or_email.label }}: {{ signin_form.user_name_or_email }}
+                                    {{ signin_form.user_name_or_email.label }}:
+                                    <p>{{ signin_form.user_name_or_email }}
+                                    <span id="required">Required</span>
+                                    </p>
                                 </p>
                                 {% for field_name, field_errors in signin_form.errors.items() %}
                                     {% if field_name ==
@@ -196,17 +198,18 @@
 
                   <div id="signup" class="blue" style="text-align: right;">
                     <form action='/signup' method='post' name='signup' autocomplete='off'>
-                        <div style="padding:30px; color: white" class="blue">
+                        <div style="padding:30px; color: white; text-align: left" class="blue">
                            {% for field in signup_form %}
                             <!-- control placement of label relative to field (labels for text fields go
                                  before the field; checkbox labels go after the field -->
-                                 {% if field.name == 'user_name' %}
-                                    <span id="required">Required</span><br>
-                                {% endif %}
                                 {% if field.type == 'BooleanField' %}
                                      <p>&nbsp;{{ field }} {{ field.label }}</p>
                                  {% elif field.type == 'TextField' or field.type == 'TextAreaField' %}
-                                     <p>{{ field.label }}: {{ field }}</p>
+                                     <p>{{ field.label }}: {{ field }}
+                                 {% if field.name == 'user_name' %}
+                                    <span id="required">Required</span><br>
+                                    </p>
+                                {% endif %}
                                  {% endif %}
                                  <!-- loop through errors for this field -->
                                  {% for field_name, field_errors in signup_form.errors.items() %}
