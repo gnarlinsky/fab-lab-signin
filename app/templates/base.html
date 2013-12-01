@@ -156,8 +156,8 @@
                                 <p>{{ signin_form.tour }}{{ signin_form.tour.label }}<p>
                                 <p>{{ signin_form.vinyl_cutter }}{{ signin_form.vinyl_cutter.label }}<p>
 
-                               <p onclick="toggle_visibility('project_types')">
-                                   {{ signin_form.project }}{{ signin_form.project.label }} </p>
+                               <p><span onclick="toggle_visibility('project_types')">
+                                   {{ signin_form.project }}</span>{{ signin_form.project.label }} </p>
                                <div id="project_types" style="display:none">
                                     <p>&nbsp;&nbsp;&nbsp;&nbsp;
                                         {{ signin_form.project_art }} {{ signin_form.project_art.label }}
@@ -173,16 +173,16 @@
                                     </p>
                                 </div>
 
-                               <p onclick="toggle_visibility('which_class')">
-                                   {{ signin_form.for_class }}{{ signin_form.for_class.label }}</p>
+                               <p><span onclick="toggle_visibility('which_class')">
+                                   {{ signin_form.for_class }}</span>{{ signin_form.for_class.label }}</p>
                                <div id="which_class" style="display:none">
                                     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         {{ signin_form.which_class.label }} {{ signin_form.which_class }}
                                     </p>
                                 </div>
 
-                               <p onclick="toggle_visibility('other_reason')">
-                                   {{ signin_form.other }}{{ signin_form.other.label }}</p>
+                               <p><span onclick="toggle_visibility('other_reason')">
+                                   {{ signin_form.other }}</span>{{ signin_form.other.label }}</p>
                                <div id="other_reason" style="display:none">
                                     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         {{ signin_form.other_text.label }} {{ signin_form.other_text }}
