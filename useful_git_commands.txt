@@ -11,7 +11,11 @@ Apply only the specified commit(s) to current branch:
 ``` $ git cherry-pick <commit> ```
 
 
+A note on branching
+--------------------
+Remember, if you create new files in one branch, then switch to another branch *without commiting first*, those files will show in the newly checked-out branch.
 Draft part
+
 -------------
 ```
 $ git checkout <branch>
@@ -19,8 +23,6 @@ $ git commit (-a vs * ..................)
 $ git push
 $ git init
 ```
-
-
 
 Committing
 ------------
@@ -40,6 +42,7 @@ actual commit
  ```
  $ git commit <file(s)> [-m <message>]
  ```
+
 
 Also:
 * Merging branches
