@@ -11,3 +11,6 @@ decorator==3.4.0
 itsdangerous==0.23
 sqlalchemy-migrate==0.7.2
 wsgiref==0.1.2
+Pygments==1.6
+Sphinx==1.2b3
+docutils=0.11
