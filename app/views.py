@@ -30,18 +30,23 @@ def signin():
         # would have two fields called user_name in the template, filled in
         # with same thing
         user = User.query.filter_by(user_name=signin_form.user_name_or_email.data).first()
+        # look up by email instead
+        if not user:
+            user = User.query.filter_by(email=signin_form.user_name_or_email.data).first()
         # TODO: log in with either email or user_name
-        if user is None:
+        if not user:
             # TODO: account for user name OR email
             # right now, just for the sake of this working, setting:
-            messg = 'User {} not found, pls try again or [insert link to sign up/create account tab]'.format(
-                signin_form.user_name_or_email.data)
+            messg_string = 'Username or email {} not found. Please try again or create an account.'
+            messg = messg_string.format(signin_form.user_name_or_email.data)
+            #messg = 'User {} not found, pls try again or [insert link to sign up/create account tab]'.format(
+            #    signin_form.user_name_or_email.data)
             flash(messg, category='error')
         else:
             if user.is_signed_in():
                 # TODO: account for user name OR email..
                 # if already signed in, tell them so
-                messg = 'User {} already signed in on {}'.format(user.user_name,
+                messg = 'User {} already signed in on {}'.format(signin_form.user_name_or_email.data,
                     user.get_time_in())
                 flash(messg, category='warning')
             else:
@@ -91,7 +96,7 @@ def signin():
                 db.session.add(new_visit)
                 db.session.commit()
 
-                messg = '{} is signed in'.format(user.user_name)
+                messg = '{} is signed in'.format(signin_form.user_name_or_email.data)
                 flash(messg, category='info')
 
     # did not validate, so return with the same signin form (otherwise won't be
