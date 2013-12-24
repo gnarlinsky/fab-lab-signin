@@ -297,6 +297,42 @@ input#submit_button {
     margin-bottom: 1px;
 }
 
+.ui-widget-header {
+background: #163B65 !important;
+color: #FFFFFF !important;
+font-weight: normal !important;
+}
+
+.ui-dialog {
+    width: 300px !important;
+}
+
+#username_finder {
+    color:rgb(255, 112, 0);
+    text-decoration: underline;
+    font-size:0.7em
+}
+
+#all_usernames_list {
+    overflow-y: scroll;
+    height: 200px;
+    border: 1px solid #aaaaaa;
+}
+
+/* force show scrollbars on OS X */
+/*
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+*/
+
 /*
 #signout p {
     background-color: #C42027;

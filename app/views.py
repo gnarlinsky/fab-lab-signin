@@ -12,6 +12,7 @@ def index():
     return render_template('base.html', anchor='signin',
                            signin_form=SignInForm(),
                            signup_form=SignUpForm(),
+                           all_users=User.query.all(),
                            signed_in_users=get_signed_in_users())
 
 @app.route('/signin', methods=['GET', 'POST'])
@@ -105,6 +106,7 @@ def signin():
         return render_template('base.html', anchor='signin',
                                signin_form=signin_form,
                                signup_form=SignUpForm(),
+                               all_users=User.query.all(),
                                signed_in_users=get_signed_in_users())
 
     return redirect(url_for('.index'))
@@ -221,6 +223,7 @@ def signup():
         return render_template('base.html', anchor=anchor,
                                signin_form=SignInForm(),
                                signup_form=signup_form,
+                               all_users=User.query.all(),
                                signed_in_users=get_signed_in_users())
 
 
