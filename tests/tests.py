@@ -1,4 +1,13 @@
 #!/usr/bin/env
+
+# we need the name of the parent dir to import our package since it's not on
+# the path
+import os,sys,inspect
+currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parentdir = os.path.dirname(currentdir)
+sys.path.insert(0,parentdir) 
+import app
+
 import unittest
 import os
 from app import app, db
@@ -100,9 +109,9 @@ if __name__ == '__main__':
     cov.stop()
     cov.save()
     # print results to console
-    print '\nCoverage Report\n===============', cov.report()
+    #print '\nCoverage Report\n===============', cov.report()
     # create and open the html file with coverage summary
-    cov.html_report(directory='./coverage')
-    os.system('open ./coverage/index.html')  # only on OS X
+    #cov.html_report(directory='./coverage')
+    #os.system('open ./coverage/index.html')  # only on OS X
 
 
