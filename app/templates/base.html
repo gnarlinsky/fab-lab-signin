@@ -147,8 +147,6 @@
                         </p>
                         -->#}
 
-
-
                         <div style="padding:30px;" class="green">
                                 <p>
                                     {{ signin_form.user_name_or_email.label }}
@@ -244,17 +242,22 @@
                   <div id="signup" class="blue" style="text-align: right;">
                     <form action='/signup' method='post' name='signup' autocomplete='off'>
                         <div style="padding:30px; color: white; text-align: left" class="blue">
+
                            {% for field in signup_form %}
+                           {% if field.name == "user_name" or
+                              field.name == "first_name" or
+                              field.name == "last_name" or
+                              field.name == "email" %}
                             <!-- control placement of label relative to field (labels for text fields go
                                  before the field; checkbox labels go after the field -->
                                 {% if field.type == 'BooleanField' %}
                                      <p>&nbsp;{{ field }} {{ field.label }}</p>
                                  {% elif field.type == 'TextField' or field.type == 'TextAreaField' %}
-                                     <p>{{ field.label }}: {{ field }}
+                                     <p>{{ field.label }} {{ field }}
+                                {% endif %}
                                  {% if field.name == 'user_name' %}
                                     <span id="required">Required</span><br>
                                     </p>
-                                {% endif %}
                                  {% endif %}
                                  <!-- loop through errors for this field -->
                                  {% for field_name, field_errors in signup_form.errors.items() %}
@@ -264,6 +267,61 @@
                                         {% endfor %}
                                     {% endif %}
                                 {% endfor %}
+                            {% endif %}
+                            {% endfor %}
+
+                        <br/>
+                        <hr>
+                        <p>&nbsp;Affiliation:</p>
+                               <p><span onclick="toggle_visibility('affiliation_uiuc_div')">
+                                    &nbsp;{{ signup_form.affiliation_uiuc }}
+                                   </span>
+                                   {{ signup_form.affiliation_uiuc.label }}
+                               </p>
+                               <div id="affiliation_uiuc_div" style="display:none">
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        {{ signup_form.student }} {{ signup_form.student.label }}
+                                    </p>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        {{ signup_form.faculty }} {{ signup_form.faculty.label }}
+                                    </p>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        {{ signup_form.staff }} {{ signup_form.staff.label }}
+                                    </p>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    {{ signup_form.major_discipline_unit.label }}
+                                    {{ signup_form.major_discipline_unit }}
+                                    </p>
+                                </div>
+
+                               <p><span onclick="toggle_visibility('affiliation_comm_div')">
+                                       &nbsp;{{ signup_form.affiliation_community }}
+                                   </span>
+                                   {{ signup_form.affiliation_community.label }}
+                               </p>
+                               <div id="affiliation_comm_div" style="display:none">
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    Please tell us what you do (examples: "high school student,"</p>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    "artist," "engineer"):
+                                    </p>
+                                    <p> &nbsp;&nbsp;&nbsp;&nbsp; {{ signup_form.what_do_you_do }}
+                                    </p>
+                                </div>
+
+                            <hr>
+                           {% for field in signup_form %}
+                            {% if field.name == "add_to_announce_list" or
+                              field.name == "add_to_volunt_list" or
+                              field.name == "how_heard" %}
+                                {% if field.type == 'BooleanField' %}
+                                     <p>&nbsp;{{ field }} {{ field.label }}</p>
+                                 {% elif field.type == 'TextField' or field.type == 'TextAreaField' %}
+                                     <p>{{ field.label }} {{ field }}
+                                {% endif %}
+
+                            {% endif %}
+
                            {% endfor %}
                             <p>
                                 <input id='submit_button' type='submit' value='Submit'>

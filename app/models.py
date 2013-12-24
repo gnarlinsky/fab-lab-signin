@@ -10,10 +10,15 @@ class User(db.Model):
     last_name = db.Column(db.String(30), index=True)
     add_to_announce_list = db.Column(db.Boolean)
     add_to_volunt_list = db.Column(db.Boolean)
-    is_uiuc_student = db.Column(db.Boolean)
-    who_i_am = db.Column(db.Text)
     how_heard = db.Column(db.Text)
     visits = db.relationship('Visit', backref='visitor', lazy='dynamic')
+    major_discipline_unit = db.Column(db.Text)
+    student = db.Column(db.Boolean)
+    staff = db.Column(db.Boolean)
+    faculty = db.Column(db.Boolean)
+    what_i_do = db.Column(db.Text)
+    affiliation_uiuc = db.Column(db.Boolean)
+    affiliation_community = db.Column(db.Boolean)
 
     def get_current_visits(self):
         """ Return all current Visits (i.e. those that lack a signout_timestamp

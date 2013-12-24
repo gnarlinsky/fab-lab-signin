@@ -53,7 +53,7 @@
                             <td>{{ user.user_name }}</td>
                             <td>{% if user.email %}{{ user.email }}{% endif %}</td>
                             <td style="width: 5em;"> <!-- TODO: no ``if``? ... reorg... -->
-                                {% if user.is_uiuc_student %}UIUC Student{%
+                                {% if user.student %}UIUC Student{%
                                 endif %}<br />
                                 {% if user.who_i_am %}{{ user.who_i_am }}{%
                                 endif %}
@@ -67,6 +67,46 @@
                         </tr>
                     {% endfor %}
                 </table>
+                <br><br>
+                !!!!!!!!!!!!!!!!!!!
+                <table>
+                    <tr>
+                        <!-- TODO: styles here -->
+                        {% for key in user_keys %}
+                        {% if key == "user_name" or
+                              key == "affiliation_uiuc" or
+                              key == "student" or
+                              key == "faculty" or
+                              key == "staff" or
+                              key == "affiliation_community" or
+                              key == "what_i_do" or
+                              key == "how_heard" or
+                              key == "user_name"
+                        %}
+                            <th class="blue whitetext">{{ key }}</th>
+                        {% endif %}
+                        {% endfor %}
+                    </tr>
+                    {% for user in all_users %}
+                        <a href="#{{ user.id }}"></a>
+                        <tr>
+                        {% for key in user_keys %}
+                        {% if key == "user_name" or
+                              key == "affiliation_uiuc" or
+                              key == "student" or
+                              key == "faculty" or
+                              key == "staff" or
+                              key == "affiliation_community" or
+                              key == "what_i_do" or
+                              key == "how_heard" or
+                              key == "user_name"
+                        %}
+                            <td class="bluestats">{{
+                            user.__getattribute__(key) }}</th>
+                        {% endif %}
+                        {% endfor %}
+                        </tr>
+                    {% endfor %}
             {% endif %}
         </div>
     </div>

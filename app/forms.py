@@ -33,9 +33,14 @@ class SignUpForm(Form):
     add_to_volunt_list = BooleanField(
         label='Can we add you to the volunteer listserv?',
         default=False)
-    is_uiuc_student = BooleanField(label='Are you a student at UIUC?')
-    who_are_you = TextField(label='If not, please tell us what you do')
+    student = BooleanField(label='Student')
+    staff = BooleanField(label='Staff')
+    faculty = BooleanField(label='Faculty')
+    affiliation_community = BooleanField(label='Community')
+    affiliation_uiuc = BooleanField(label='UIUC')
+    what_do_you_do = TextField(label='Please tell us what you do (examples: "high school student," "artist," "engineer"):')
     how_heard = TextField(label='How did you hear about us?')
+    major_discipline_unit = TextField(label='Major, discipline, or unit: ')
 
 
 class SignInForm(Form):

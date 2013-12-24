@@ -199,10 +199,15 @@ def signup():
                             email=email,
                             add_to_announce_list=signup_form.add_to_announce_list.data,
                             add_to_volunt_list=signup_form.add_to_volunt_list.data,
-                            is_uiuc_student=signup_form.is_uiuc_student.data,
-                            who_i_am=signup_form.who_are_you.data,
-                            how_heard=signup_form.how_heard.data
-                            )
+                            student=signup_form.student.data,
+                            staff=signup_form.staff.data,
+                            faculty=signup_form.staff.data,
+                            what_i_do=signup_form.what_do_you_do.data,
+                            how_heard=signup_form.how_heard.data,
+                            affiliation_uiuc=signup_form.affiliation_uiuc.data,
+                            affiliation_community=signup_form.affiliation_community.data,
+                            major_discipline_unit = signup_form.major_discipline_unit.data
+                           )
             db.session.add(new_user)
             db.session.commit()
 
@@ -232,9 +237,13 @@ def stats():
     """ docstring """
     # TODO: sending keys is of course hacky......
     visit_keys = [key for key in Visit.__dict__.keys() if key[0] != '_']
+    # i.e. columns for user table
+    user_keys = [key for key in User.__dict__.keys() if key[0] != '_']
     return render_template('stats.html', all_users=User.query.all(),
                            all_visits=Visit.query.all(),
-                           visit_keys=visit_keys)
+                           visit_keys=visit_keys,
+                           user_keys=user_keys
+                          )
 
 
 def get_signed_in_users():
