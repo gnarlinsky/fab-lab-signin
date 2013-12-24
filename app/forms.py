@@ -42,6 +42,28 @@ class SignUpForm(Form):
     how_heard = TextField(label='How did you hear about us?')
     major_discipline_unit = TextField(label='Major, discipline, or unit: ')
 
+    def validate(self):
+        """ In addition to the default validation, make sure that user enters
+        an email address if they want to sign up for a listserv def
+        """
+        print dir(self)
+        if not Form.validate(self):
+            return False
+        if ( (self.add_to_announce_list.data or self.add_to_volunt_list.data)
+             and 
+             self.email.data.strip() == ""):
+             self.email.errors.append("Please provide a valid email address to be added to our mailing list(s).")
+             return False
+        return True
+        """
+user = User.query.filter_by(email = self.email.data.lower()).first()
+if user:
+self.email.errors.append("That email is already taken")
+ return False
+     else:
+           return True
+           """
+
 
 class SignInForm(Form):
     """ description go here """    # TODO
