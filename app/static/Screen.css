@@ -279,12 +279,14 @@ input#submit_button {
     /*text-shadow: -1px -1px 2px black;*/
 }
 
-#signup span#error {
+#signup p#error {
     color: red;
     text-align: right;
     margin-left: 20px;
     margin-bottom: 20px;
     font-style: italic;
+    font-size: 1em;
+    text-align: left
 }
 
 #required {
@@ -317,6 +319,15 @@ font-weight: normal !important;
     overflow-y: scroll;
     height: 200px;
     border: 1px solid #aaaaaa;
+}
+
+#flash_message {
+    width: 300px;
+    margin: 20px auto;
+    padding: 10px;
+    text-align: center;
+    border: 1px #C42027 solid;
+    background: #fff
 }
 
 /* force show scrollbars on OS X */

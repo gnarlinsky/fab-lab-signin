@@ -97,9 +97,7 @@
     {% with messages = get_flashed_messages() %}
         {% if messages %}
         <!-- note the new 'class = category ' below!! -->
-            <div style="width: 300px; margin: 20px auto; padding: 10px;
-            text-align: center; border: 1px blue solid; background: #fff"
-            class="{{ category }}">
+            <div id="flash_message" class="{{ category }}">
                 {% for message in messages %}
                     {{ message }}<br />
                 {% endfor %}
@@ -263,7 +261,7 @@
                                  {% for field_name, field_errors in signup_form.errors.items() %}
                                     {% if field_name == field.name %}
                                         {% for error in field_errors %}
-                                            <span id="error">{{ error }}</span>
+                                            <p id="error">{{ error }}</p>
                                         {% endfor %}
                                     {% endif %}
                                 {% endfor %}
