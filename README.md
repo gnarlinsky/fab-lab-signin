@@ -8,6 +8,7 @@ Extending and porting from PHP/MySQL.
 Installing and Running
 --------------------------
 * Clone this repository
+* ```$ git checkout develop``` (make sure you're in the "develop" branch)
 * Set up and activate a virtual environment
 * ```$ pip install -r requirements.txt```
 * ```$ python db_create.py```
