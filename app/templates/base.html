@@ -88,6 +88,17 @@
             appendTo: "#username_finder_dialog"
             });
         });
+
+        /***************************************
+        * privacy policy popup
+        ***************************************/
+        $(document).ready(function() {
+            $("#privacy_policy_icon").click(function() {
+                    $("#privacy_policy_dialog").dialog();
+                    return false;
+            });
+        });
+
     </script>
 
 
@@ -254,8 +265,30 @@
                                      <p>{{ field.label }} {{ field }}
                                 {% endif %}
                                  {% if field.name == 'user_name' %}
-                                    <span id="required">Required</span><br>
+                                    <span id="required">Required</span>
+                                    <a href="" id="privacy_policy_icon">
+                                        <img src="{{ url_for('static', filename='privacy_policy_icon.png') }}" width="50px">
+                                    </a>
                                     </p>
+                                    {# <!-- privacy policy dialog --> #}
+                                    <div id="privacy_policy_dialog" title="Our Privacy Policy" style="display:none; width:600px;">
+                                        <p>
+                                            Lorem ipsum dolor sit amet,
+                                            consectetur adipisicing elit, sed
+                                            do eiusmod tempor incididunt ut
+                                            labore et dolore magna aliqua. Ut
+                                            enim ad minim veniam, quis nostrud
+                                            exercitation ullamco laboris nisi
+                                            ut aliquip ex ea commodo consequat.
+                                            Duis aute irure dolor in
+                                            reprehenderit in voluptate velit
+                                            esse cillum dolore eu fugiat nulla
+                                            pariatur. Excepteur sint occaecat
+                                            cupidatat non proident, sunt in
+                                            culpa qui officia deserunt mollit
+                                            anim id est laborum.
+                                        </p>
+                                    </div>
                                  {% endif %}
                                  <!-- loop through errors for this field -->
                                  {% for field_name, field_errors in signup_form.errors.items() %}
