@@ -22,9 +22,9 @@ The Long Version
 ----------------
 * Clone this repository or download the zip file
 
-* cd into the fab-lab-signin (if you download the zip file, also cd into the
-fab-lab-signin-master directory) -- you should be in the same directory that
-has ```requirements.txt``` at that point
+* cd into the *fab-lab-signin* directory (if you download the zip file,
+continue on into the *fab-lab-signin-master* directory) -- you should end up in
+the same directory that has *requirements.txt* at that point
 
 * Set up your virtualenv and activate it like this:
 ```
@@ -46,10 +46,10 @@ $ pip install -r requirements.txt
 
 * Now you can create some fake data and run the site:
 ```
-$ python make_fakes.py   (answer yes to the 'do you want to continue' question )
+$ python make_fakes.py   #answer yes to the 'do you want to continue' question
 $ python run.py
 ```
 
 * now go to http://127.0.0.1:5000/  in your favorite browser (but note that this is meant to run in Chrome)
 
-* To stop run.py, type cntrl-C
+* To stop ``run.py``, type cntrl-C
